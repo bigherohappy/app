@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+        div.panel {
+            width: 500px;
+            margin: 50px auto;
+        }
+        
+        form input {
+            width: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            请注册
+        </div>
+        <div class="panel-body">
+            <form id="form" class="form-horizontal" role="form">
+                <div class="form-group has-feedback">
+                    <label class="col-sm-3 control-label">帐号：</label>
+                    <div class="col-sm-9 star">
+                        <input required pattern="\w{6,8}" class="form-control" name="accout" placeholder="请输入您的帐号">
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="col-sm-3 control-label">密码：</label>
+                    <div class="col-sm-9 star">
+                        <input type="password" required class="form-control pwd" name="password" pattern="\w{3,6}" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="col-sm-3 control-label">确认密码：</label>
+                    <div class="col-sm-9 star">
+                        <input type="password" required class="form-control pwd" pattern="\w{3,6}" placeholder="请再次输入密码">
+                    </div>
+                </div>
+                <div class="form-group has-feedback">
+                    <label class="col-sm-3 control-label">昵称：</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" pattern="\S{2,10}" required name="nicheng" placeholder="请输入您的昵称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-3 col-sm-offset-3">
+                        <button type="submit" class="btn btn-default submit">注册</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <button type="reset" id="reset" class="btn btn-default reset">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="/js/jquery-2.1.3.js"></script>
+<script>
+    let form = document.getElementById("form");
+    let aPwd = form.querySelectorAll('input.pwd');
+    form.onsubmit = function(e) {
+        e = e || event;
+        e.preventDefault();
+        if (aPwd[0].value === aPwd[1].value) {
+            $.post('/admin/registed', $(this).serialize(), function(rs) {
+                if (rs)
+                    window.location.href = '/admin';
+                else
+                    alert('帐号已被占用')
+            }, 'json')
+        } else
+            alert('两次密码不一致！');
+        return false
+    }
+</script>
+
+</html>

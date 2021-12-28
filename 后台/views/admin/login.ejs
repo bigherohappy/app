@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <style>
+        .big {
+            background: url('/images/back2.jpg') no-repeat;
+            /* background-size: cover; */
+            background-size: 100% 100%;
+            height: 100%;
+            position: fixed;
+            width: 100%;
+        }
+
+        div.panel {
+            width: 540px;
+            margin: 100px auto 0;
+        }
+
+        .panel {
+            background-color: rgba(12, 12, 12, 0.2);
+            border: 1px solid white;
+
+        }
+
+        .panel-heading h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="big">
+        <div class="panel ">
+            <div class="panel-heading">
+                <h3>管理员请登录</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" id="form">
+                    <div class="form-group has-feedback">
+                        <label class="col-sm-2 control-label">帐号：</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" name="accout" pattern="\w{6,8}" required placeholder="请输入您的帐号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">密码：</label>
+                        <div class="col-sm-8">
+                            <input type="password" name="password" class="form-control" required pattern="\w{3,6}"
+                                placeholder="请输入您的密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">验证码：</label>
+                        <div class="col-sm-4">
+                            <input class="form-control" name="captcha" required pattern="\w{4}">
+                        </div>
+                        <div class="col-sm-6">
+                            <%-captcha%>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 col-sm-offset-2">
+                            <button type="submit" class="btn btn-default">登录</button>
+                        </div>
+                        <div class="col-sm-2 col-sm-offset-1">
+                            <button type="reset" class="btn btn-default">重置</button>
+                        </div>
+                        <div class="col-sm-2 col-sm-offset-1">
+                            <a href="/admin/register">注册</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="/js/jquery-2.1.3.js"></script>
+<script>
+    let form = document.getElementById("form");
+    form.onsubmit = function (e) {
+        e = e || event;
+        e.preventDefault();
+        $.post('/admin/logined', $(this).serialize(), function (rs) {
+            if (rs === 1) {
+                window.location.href = '/admin';
+            } else if (rs === 2){
+                alert('帐号或者密码有误！');
+            }else{
+                alert('验证码有错误！')
+            }
+              
+
+        })
+        return false
+    }
+</script>
+
+
+</html>
