@@ -16,6 +16,7 @@ import MyProject from '../components/My/MyProject'
 import MyCollection from '../components/My/MyCollection'
 import MyDetail from '../components/My/MyDetail'
 import ShopDetail from '../components/ShopDetail'
+import Shop from '../components/Shop'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,7 @@ const routes = [
   {path: '/myProject',component: MyProject},
   {path: '/myDetail',component: MyDetail},
   {path: '/shopDetail/:id',component: ShopDetail},
+  {path: '/shop',component: Shop},
   
 ]
 
