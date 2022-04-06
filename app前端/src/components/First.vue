@@ -100,7 +100,7 @@ div.first {
   touch-action: none;
   .headerb{
     display: flex;
-     background-color: red;
+     background-color: rgb(120, 230, 157);
      height: 50px;
      h4{
        padding:0 10px;
@@ -112,7 +112,9 @@ div.first {
       box-sizing: border-box;
        height: 50px;
        .mint-searchbar {
-        background-color: red;
+        // background-color: red;
+     background-color: rgb(120, 230, 157);
+
           }
       i {
         color: white;
@@ -122,8 +124,10 @@ div.first {
   .body1 {
     background-color: rgb(255, 255, 255);
    .mint-navbar .mint-tab-item.is-selected {
-      border-bottom: 2px solid red;
-      color: red;
+      // border-bottom: 2px solid red;
+      border-bottom: 2px solid rgb(120, 230, 157);
+      color: rgb(120, 230, 157);
+      // color: red;
     }
     padding-top: 50px;
     .mint-navbar {
@@ -192,12 +196,12 @@ div.first {
   // }
 }
 div.mint-searchbar-inner {
-  background-color: rgb(236, 182, 182);
+  background-color: rgb(182, 236, 194);
   width: 240px;
   border-radius: 20px;
 
   .mint-searchbar-core {
-    background-color: rgb(236, 182, 182);
+    background-color: rgb(182, 236, 194);
   }
   .mintui-search {
     font-size: 14px;

@@ -51,7 +51,7 @@ createApp(App).use(router).mount('#app')
 
 <
 script >
-    import Head1 from "./components/Head1.vue";
+import Head1 from "./components/Head1.vue";
 import Foot from "./components/Foot.vue";
 import Nav from "./components/Nav.vue";
 import { screenW } from "./model/pubData";
@@ -80,8 +80,8 @@ export default {
         Foot,
         Nav
     }
-}; <
-/script>
+}; 
+</script>
 
 //----------------------------------------------------------------
 //6、js代码方式导航

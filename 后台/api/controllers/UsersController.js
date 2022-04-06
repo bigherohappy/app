@@ -78,10 +78,18 @@ module.exports = {
       const arr=await Product.find().sort("id desc").skip(skip).limit(pageSize);
       res.json(arr);
     },
+    // 得到文章数据
     getArt1: async function(req, res) {
       let skip=req.query.start;
       let pageSize=req.query.pageSize;
       const arr=await Article1.find().sort("id desc").skip(skip).limit(pageSize);
+      res.json(arr);
+    },
+    // 得到活动数据
+    getActive: async function(req, res) {
+      let skip=req.query.start;
+      let pageSize=req.query.pageSize;
+      const arr=await Active.find().sort("id desc").skip(skip).limit(pageSize);
       res.json(arr);
     },
     getSearchData: async function(req, res) {

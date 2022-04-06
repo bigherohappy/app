@@ -52,7 +52,7 @@
       </mt-field>
 
       <div class="btn">
-        <button >注册</button>
+        <button>注册</button>
         <button type="reset">重置</button>
       </div>
     </form>
@@ -110,12 +110,13 @@ div.rigster {
     background-size: 100% 1px;
   }
   .myhead{
-    background-color:rgb(150, 30, 30);
-
+    // background-color:rgb(150, 30, 30);
+    background-color: rgb(120, 230, 157);
   }
   b {
     display: inline-block;
-    color: rgb(150, 30, 30);
+    // color: rgb(150, 30, 30);      
+    color:  rgb(120, 230, 157);
     padding-top: 5px;
   }
   div.btn {
@@ -127,7 +128,9 @@ div.rigster {
       border-radius: 4px;
       border: none;
       outline: none;
-      background-color: rgb(150, 30, 30);
+      // background-color: rgb(150, 30, 30);
+    background-color: rgb(120, 230, 157);
+
       color: white;
       &:last-child {
         background-color: transparent;

@@ -76,7 +76,7 @@ div.search {
   touch-action: none;
   .headerb {
     display: flex;
-    background-color: red;
+    background-color: rgb(120, 230, 157);
     height: 50px;
     h4 {
       padding: 0 10px;
@@ -88,7 +88,7 @@ div.search {
       box-sizing: border-box;
       height: 50px;
       .mint-searchbar {
-        background-color: red;
+        background-color: rgb(120, 230, 157);
       }
       i {
         color: white;

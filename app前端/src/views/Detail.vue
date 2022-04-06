@@ -1,7 +1,7 @@
 <template>
 <!-- 详情页 -->
   <div class="detail">
-    <mt-header fixed title="详情" style="background-color:red">
+    <mt-header fixed title="详情" style="background-color:rgb(120, 230, 157)">
       <router-link to="/tabbar" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>

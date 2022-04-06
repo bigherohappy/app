@@ -1,7 +1,7 @@
 <template>
   <!-- 我的页面 -->
-  <div class="mylogin" :style="appCss">
-    <div class="my" v-if="isLogin">
+  <div class="mylogin">
+    <div class="my" v-if="isLogin" :style="loginCss">
       <div class="header">
         <mt-cell-swipe>
           <mt-cell is-link to="/personal">
@@ -44,8 +44,7 @@
       </div>
       <div class="three">
         <div class="three1p">
-         
-          <div class="three1 pub"  @click="enteractive">
+          <div class="three1 pub" @click="enteractive">
             <img :src="`${this.Url}images/1/组织.png`" width="40" height="40" alt />
             <p>我的消息</p>
           </div>
@@ -87,34 +86,45 @@
         <mt-button size="large" type="danger" class="logout" @click.native="logout">注销</mt-button>
       </div>
     </div>
-    <div class="form" v-else>
-      <h3>请登录</h3>
-      <form @submit.prevent="submit">
-        <mt-field label="账号">
-          <input
-            placeholder="请输入账号"
-            :attr="{ pattern: '1\\d{10}', required: true }"
-            v-model="obj.phone"
-          />
-          <b>*</b>
-        </mt-field>
-        <mt-field label="密码">
-          <input
-            placeholder="请输入密码"
-            autocomplete
-            :attr="{ pattern: '\\S{3,6}', required: true }"
-            type="password"
-            v-model="obj.password"
-          />
-          <b>*</b>
-        </mt-field>
-        <div class="btn">
-          <button class="submitBtn">提交</button>
-          <button type="reset">重置</button>
+    <div class="form" :style="appCss" v-else>
+      <div class="myform">
+        <h2>请登录</h2>
+        <form @submit.prevent="submit">
+          <!-- <mt-field label="账号"> -->
+          <div class="phone">
+            <label>
+              账号
+              <input
+                placeholder="请输入账号"
+                :attr="{ pattern: '1\\d{10}', required: true }"
+                v-model="obj.phone"
+              />
+            </label>
+          </div>
+
+
+          <div class="pw">
+            <label>
+              密码:
+              <input
+                placeholder="请输入密码"
+                autocomplete
+                :attr="{ pattern: '\\S{3,6}', required: true }"
+                type="password"
+                v-model="obj.password"
+              />
+            </label>
+          </div>
+
+          <div class="btn">
+            <button class="submitBtn">提交</button>
+            <button type="reset">重置</button>
+          </div>
+        </form>
+
+        <div class="rigster">
+          <router-link to="/rigster">新用户请点击此次注册</router-link>
         </div>
-      </form>
-      <div class="rigster">
-        <router-link to="/rigster">新用户请点击此次注册</router-link>
       </div>
     </div>
   </div>
@@ -157,30 +167,31 @@ export default {
       this.$store.commit("logout");
       this.isLogin = false;
     },
-    enterimage(){
-       this.$router.push("/myImage");
+    enterimage() {
+      this.$router.push("/myImage");
     },
-    enteractive(){
-       this.$router.push("/myInfo");
+    enteractive() {
+      this.$router.push("/myInfo");
     },
-    entermyFriend(){
-       this.$router.push("/myFriend");
+    entermyFriend() {
+      this.$router.push("/myFriend");
     },
-    entermyCollection(){
-       this.$router.push("/myCollection");
+    entermyCollection() {
+      this.$router.push("/myCollection");
     },
-     entermypublicWelfare(){
-       this.$router.push("/mypublicWelfare");
+    entermypublicWelfare() {
+      this.$router.push("/mypublicWelfare");
     },
-      entermyProject(){
-       this.$router.push("/myProject");
-    },
+    entermyProject() {
+      this.$router.push("/myProject");
+    }
   },
   data() {
     return {
-      appCss: `background-image:url('${this.$store.state.Url}images/1.jpg');
-      background-size:100% ${this.$store.state.screenH - 51}px;height:${this
-        .$store.state.screenH - 51}px`,
+      appCss: `background-image:url('${this.$store.state.Url}images/back.jpg');
+      background-size:100% ${this.$store.state.screenH}px;height:${this.$store.state.screenH}px`,
+      loginCss: `background-size:100% ${this.$store.state.screenH}px;
+      height:${this.$store.state.screenH - 51}px`,
       obj: {
         phone: "",
         password: ""
@@ -198,55 +209,90 @@ export default {
 
 <style scoped lang='less'>
 .mylogin {
-  div.form {
-    border: 1px solid black;
-    width: 90%;
-    height: 300px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.9);
-    margin: 50px auto;
-
-    h3 {
-      text-align: center;
-      letter-spacing: 5px;
-      color: #555;
-    }
-    div.rigster {
-      text-align: center;
-      margin-top: 30px;
-      padding-top: 0;
-      a,
-      a:visited {
-        text-decoration: none;
-        color: red;
+  margin: 0;
+  padding: 0;
+  .form {
+    position: relative;
+    div.myform {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      height: 300px;
+      border-radius: 10px;
+      background: rgba(7, 7, 7, 0.1);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+      // background-color: rgba(255, 255, 255, 0.9);
+      margin: 0px auto;
+      .mint-cell {
+        background: transparent;
       }
-    }
-    .mint-cell-wrapper {
-      background-size: 100% 1px;
-    }
-    b {
-      display: inline-block;
-      color: red;
-      padding-top: 5px;
-    }
-    div.btn {
-      display: flex;
-      justify-content: space-around;
-      button {
-        padding: 8px 25px;
-        margin: 10px;
-        border-radius: 4px;
-        border: none;
+      input {
         outline: none;
-        background-color: rgb(165, 40, 35);
-        color: white;
-        &:last-child {
-          background-color: transparent;
-          background-color: #555;
+        border: none;
+        background: transparent;
+      }
+      .phone {
+        margin: 20px;
+        border-bottom: 1px solid white;
+      }
+      .pw {
+        margin: 20px;
+        border-bottom: 1px solid white;
+      }
+      label {
+        color: rgb(255, 254, 254);
+        // padding: 30px;
+      }
+      h2 {
+        text-align: center;
+        // margin: 20px auto;
+        letter-spacing: 5px;
+        color: rgb(255, 254, 254);
+        padding-top: 30px;
+      }
+      div.rigster {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 0;
+        a,
+        a:visited {
+          text-decoration: none;
+          color: red;
+        }
+      }
+      .mint-cell-wrapper {
+        background-size: 100% 1px;
+      }
+      b {
+        display: inline-block;
+        color: red;
+        padding-top: 5px;
+      }
+      div.btn {
+        display: flex;
+        justify-content: space-around;
+        button {
+          padding: 8px 25px;
+          margin: 10px;
+          border-radius: 4px;
+          border: none;
+          outline: none;
+          // background-color: rgb(165, 40, 35);
+              background-color: rgb(120, 230, 157);
+          color: white;
+          &:last-child {
+            background-color: transparent;
+            background-color: #555;
+          }
         }
       }
     }
   }
+
+  
+
   .my {
     background-color: white;
     .header {
@@ -261,7 +307,9 @@ export default {
       background-color: white;
       .Personal {
         width: 40px;
-        background-color: rgb(230, 114, 114);
+        // background-color: rgb(230, 114, 114);
+              background-color: rgb(120, 230, 157);
+
         padding: 5px 2px;
         border-radius: 10px;
         color: white;
@@ -298,8 +346,9 @@ export default {
           p {
             text-align: center;
           }
+              background-color: rgb(120, 230, 157);
 
-          background-color: rgb(230, 114, 114);
+          // background-color: rgb(230, 114, 114);
         }
       }
     }

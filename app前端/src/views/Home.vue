@@ -8,7 +8,7 @@
 export default {
   data(){
     return{
-      appCss:`background-image:url('${this.$store.state.Url}images/2.jpg');
+      appCss:`background-image:url('${this.$store.state.Url}images/lu.jpg');
       background-size:100% ${this.$store.state.screenH}px; height:${this.$store.state.screenH}px;`
     
     }

@@ -139,6 +139,7 @@ module.exports = {
                 res.json(row);
             });
     },
+    // 添加文章
     addArticle1: async function(req, res) {
         req.file('smallSrc').upload({
                 dirname: require('path').resolve(sails.config.appPath, 'assets/smallSrc')
@@ -157,6 +158,38 @@ module.exports = {
             });
     },
     newImg1: function(req, res) {
+        req.file('image').upload({
+                dirname: require('path').resolve(sails.config.appPath, 'assets/upload')
+            },
+            function(err, files) {
+                if (err)
+                    return res.serverError(err);
+                if (files.length === 0)
+                    return res.json(false);
+                let arr = files[0].fd.split('\\');
+                let fileName = arr[arr.length - 1];
+                res.json(fileName);
+            });
+    },
+    // 添加活动
+    addActive: async function(req, res) {
+        req.file('smallSrc').upload({
+                dirname: require('path').resolve(sails.config.appPath, 'assets/smallSrc')
+            },
+            async function(err, files) {
+                if (err)
+                    return res.serverError(err);
+                if (files.length === 0)
+                    return res.json(false);
+                let smallImg = files[0].fd.split('\\');
+                smallImg  = smallImg[smallImg.length - 1];
+                let json=req.allParams();
+                json.smallSrc=smallImg;
+                let row = await Active.create(json).fetch();
+                res.json(row);
+            });
+    },
+    newActive: function(req, res) {
         req.file('image').upload({
                 dirname: require('path').resolve(sails.config.appPath, 'assets/upload')
             },

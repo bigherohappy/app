@@ -15,11 +15,11 @@ export default {
   data() {
     return {
       time: 0,
-      aboutCss: `background-image:url('${this.$store.state.Url}images/中国人.jpg');
+      aboutCss: `background-image:url('${this.$store.state.Url}images/3.jpg');
       background-size:100% ${this.$store.state.screenH}px; height:${this.$store.state.screenH}px;`,
       arr: [
         { id: 1, title: "", content: `` },
-      ]
+      ],
     };
   },
   mounted() {
@@ -38,6 +38,8 @@ export default {
   methods: {
     goTabbar() {
       this.$router.replace("/tabbar");
+      console.log(this.aqq,hhhhhhh);
+      
     },
     countDown() {
       let _this = this;

@@ -10,12 +10,14 @@ import Personal from '../components/Personal'
 import MyImage from '../components/MyImage'
 import Rigster from '../views/Rigster'
 import MyInfo from '../components/MyInfo'
+import Info from '../components/Info'
 import MyFriend from '../components/MyFriend'
 import MypublicWelfare from '../components/My/MypublicWelfare'
 import MyProject from '../components/My/MyProject'
 import MyCollection from '../components/My/MyCollection'
 import MyDetail from '../components/My/MyDetail'
 import ShopDetail from '../components/ShopDetail'
+import Shop from '../components/Shop'
 
 Vue.use(VueRouter)
 
@@ -30,12 +32,14 @@ const routes = [
   {path: '/rigster',component: Rigster},
   {path: '/myImage',component: MyImage},
   {path: '/myInfo',component: MyInfo},
+  {path: '/info',component: Info},
   {path: '/myFriend',component: MyFriend},
   {path: '/mypublicWelfare',component: MypublicWelfare},
   {path: '/myCollection',component:MyCollection},
   {path: '/myProject',component: MyProject},
   {path: '/myDetail',component: MyDetail},
   {path: '/shopDetail/:id',component: ShopDetail},
+  {path: '/shop',component: Shop},
   
 ]
 

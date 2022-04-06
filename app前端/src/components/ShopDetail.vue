@@ -1,7 +1,7 @@
 <template>
   <!-- 详情页 -->
   <div class="shopDetail" :style="`height:${$store.state.screenH-51}px`">
-    <mt-header fixed title="详情" style="background-color: red">
+    <mt-header fixed title="详情" style="background-color: rgb(120, 230, 157)">
       <router-link to="/tabbar" slot="left">
         <mt-button icon="back">返回</mt-button>
       </router-link>
@@ -42,11 +42,17 @@
     <img slot="icon" src="@/assets/icon/加入购物车.png">
     加入购物车
   </mt-tab-item>
-    <mt-tab-item id="立即购买" style="background:red;padding:20px;font-weight:600;font-size:20px;color: white;">
-    <!-- <img slot="icon" src="@/assets/icon/加入购物车.png"> -->
+  <!-- <div  @click="enterShop">
+      <mt-tab-item id="立即购买" style="background:red;padding:20px;font-weight:600;font-size:20px;color: white;">
     立即购买
+     </mt-tab-item>
+  </div> -->
+    <mt-tab-item id="立即购买" @click.native="enterShop" style="background:red;padding:20px;font-weight:600;font-size:20px;color: white;">
+   
+   立即购买
   </mt-tab-item>
 </mt-tabbar>
+
   </div>
 </template>
 <script>
@@ -67,6 +73,12 @@ export default {
       this.obj = obj;
     });
   },
+  methods:{
+    enterShop(){
+      // alert('aa')
+      this.$router.push('/shop')
+    }
+  }
 };
 </script>
 <style lang="less" scoped>

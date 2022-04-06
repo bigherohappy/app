@@ -20,6 +20,7 @@
       <mt-swipe-item>
           <img :src="`${this.Url}images/ban9.jpg`" alt />
       </mt-swipe-item>
+       
     </mt-swipe>
     <mt-loadmore ref="refresh" :top-method="refrash" :topDistance="30">
       <ul
@@ -55,20 +56,7 @@ export default {
       i: 1,
       curPage: 0,
       skip: 0,
-      // right: id => [
-      //   {
-      //     content: "删除",
-      //     style: { background: "red", color: "#fff" },
-      //     handler: () => this.fun(id)
-      //   }
-      // ],
-      // left: id => [
-      //   {
-      //     content: "不显示",
-      //     style: { background: "red", color: "#fff" },
-      //     handler: () => this.fun1(id)
-      //   }
-      // ]
+     
     };
   },
   mounted() {
@@ -90,12 +78,7 @@ export default {
         this.getListData();
       }
     },
-    // fun(id) {
-    //   console.log("del");
-    // },
-    // fun1(id) {
-    //   console.log("noshow");
-    // },
+   
     getListData(fun) {
       const skip = this.skip;
       const params = { params: { start: this.skip, pageSize: 8 } };

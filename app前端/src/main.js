@@ -5,6 +5,11 @@ import store from './store'
 import Axios from 'axios'
 import 'default-passive-events'
  //import './mintui'
+
+import Vant from 'vant';
+import 'vant/lib/index.css';
+Vue.use(Vant);
+
  import Mint from 'mint-ui'
  import 'mint-ui/lib/style.min.css'
  import { InfiniteScroll } from 'mint-ui';
