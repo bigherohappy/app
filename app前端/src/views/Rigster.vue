@@ -75,6 +75,8 @@ export default {
           delete rs.password;
           console.log(rs);
           this.$store.commit('writeUserInfo',rs);
+          Toast('注册成功')
+         
           this.$router.go(-1)
          }else{
            Toast('手机号码重复，请重新输入')

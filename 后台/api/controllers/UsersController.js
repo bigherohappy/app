@@ -122,6 +122,12 @@ module.exports = {
         const num=await Product.count({'productId':id})
         res.json({obj,num});
       },
+      getActiveId: async function(req, res) {
+        let id=req.query.id;
+        const obj=await Active.findOne({id});
+        const num=await Active.count({'activeId':id})
+        res.json({obj,num});
+      },
       getAudioId: async function(req, res) {
         let id=req.query.id;
         const obj=await Audio.findOne({id});
@@ -188,12 +194,12 @@ module.exports = {
       },
       insertProduct: async function(req, res) {
         const arr=[];
-        for(let i=1;i<=40;i++){
+        for(let i=1;i<=8;i++){
             let json={}
             json.product="商品";
             json.price=100;
-            json.smallSrc='sourceImg/'+parseInt(Math.random()*40+1)+'.jpg';
-            json.smallSrc='sourceImg/'+`${i}`+'.jpg';
+            // json.smallSrc='sourceImg/'+parseInt(Math.random()*40+1)+'.jpg';
+            json.smallSrc='shop/'+`${i}`+'.jpg';
             arr.push(json)
         }
         const temp =await Product.createEach(arr).fetch();

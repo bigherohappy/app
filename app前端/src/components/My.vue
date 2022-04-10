@@ -409,4 +409,7 @@ export default {
     }
   }
 }
+input:-internal-autofill-selected {
+      background-color: none ;
+}
 </style>

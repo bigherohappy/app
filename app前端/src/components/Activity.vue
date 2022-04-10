@@ -12,12 +12,14 @@
           infinite-scroll-distance="10"
         >
           <li v-for="el in list" :key="el.id">
-            <div class="active" @click="goactive">
+              <router-link :to="`/activieDetail/${el.id}`">
+            <div class="active">
              
               <h5>{{el.title}}</h5>
               <img :src="el.src" alt />
               <!-- <img :src="`${$store.state.Url}images/Activity.jpg`" alt /> -->
             </div>
+              </router-link>
           </li>
         </ul>
       </mt-loadmore>

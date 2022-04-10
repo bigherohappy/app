@@ -11,19 +11,21 @@
       <!-- <h3>hhhhhh</h3>
       <h3 v-html="obj.id"></h3> -->
       <img :src="obj.src" alt="" />
-      <h3>{{ obj.price }}</h3>
+      <h3>{{ obj.product }}</h3>
+
+      <!-- <h3>{{ obj.price }}</h3> -->
       <!-- <aside v-html="obj.src"></aside>
       <div class="con" v-html="obj.content"></div> -->
     </div>
     <div>
-      <mt-cell>{{obj.product}}</mt-cell>
-      <mt-cell title="送至" value="销售(0)"></mt-cell>
+      <mt-cell title="价格"  >{{obj.price }}元/kg</mt-cell>
+      <mt-cell title="送至" value="销售(100)"></mt-cell>
       <mt-cell title="选择" to="//github.com" is-link value=""></mt-cell>
-      <mt-cell title="评论(0)" to="//github.com" is-link value="">
+      <mt-cell title="评论(66)" to="//github.com" is-link value="">
       </mt-cell>
      
   
-      <mt-cell title="标题" label="描述信息" is-link></mt-cell>
+      <mt-cell title="描述" label="" is-link>{{ obj.product }}</mt-cell>
     </div>
     <mt-tabbar fixed >
   <mt-tab-item id="店铺">
@@ -76,7 +78,7 @@ export default {
   methods:{
     enterShop(){
       // alert('aa')
-      this.$router.push('/shop')
+      this.$router.push( '/shop')
     }
   }
 };

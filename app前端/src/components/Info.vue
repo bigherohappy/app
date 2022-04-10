@@ -47,26 +47,35 @@
               infinite-scroll-disabled="loading"
               infinite-scroll-distance="10"
             >
+              <router-link :to="`/MyDetail/${item.id}`">
               <div class="left" @click="godetail">
                 <img :src="item.src" alt />
-                <span>{{item.id}}</span>
+                <!-- <p>{{item.id}}</p> -->
+                <p>洞鹿美景</p>
+                <!-- <p>欢迎您</p> -->
               </div>
+                </router-link>
             </div>
           </template>
         </div>
+         <!-- <customFlow ref="waterfallsFlowRef" :value="list"></customFlow> -->
       </aside>
     </div>
   </div>
 </template>
 <script>
+import customFlow from '../components/pubo'
 import { Toast } from "mint-ui";
 export default {
   name: "info",
-
+components:{
+customFlow
+},
   data() {
     return {
       Url: this.$store.state.Url,
       list: [],
+       list1:['洞鹿风光','美景','美食','洞鹿风光','美景','美食','洞鹿风光','美景','美食'],
       loading: false,
       i: 1,
       curPage: 0,
@@ -168,14 +177,28 @@ export default {
       display: flex;
       flex-wrap: wrap;
       .one {
+          a{
+            color: black;
+          }
         .left {
+          border-radius: 10px;
+          height: 140px;
           width: 150px;
           padding: 10px;
-          // background-color: rgb(172, 37, 37);
+          margin-left: 10px;
+          margin-top: 10px;
+          background-color: #fff;
+          border: 1px solid #eee;
           img {
             border-radius: 10px;
-            width: 70%;
+            width: 100%;
           }
+          p{
+            padding-left: 10px;
+          
+          }
+        
+        
         }
       }
     }

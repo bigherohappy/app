@@ -1,9 +1,9 @@
 <template>
   <!-- 消息页面 -->
   <div class="mydetail" :style="`height:${$store.state.screenH - 51}px`">
-    <h3>特产</h3>
+    <h3 style="margin-left:15px;">特产</h3>
 <van-notice-bar   :scrollable="true"
-  text="把特产带回家给亲爱的她，满满的爱带回家"
+  text="把特产带回家给亲爱的她、他，满满的爱带回家"
   left-icon="volume-o"
 />
     <!--     
@@ -15,7 +15,7 @@
         <div>{{ el.price }}</div> -->
         <van-swipe-cell>
           <van-card
-            num="2"
+            num="999"
             :price="el.price"
             desc="洞鹿特产"
             :title="el.product"
