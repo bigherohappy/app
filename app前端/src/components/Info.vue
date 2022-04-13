@@ -8,7 +8,9 @@
           <h3>Discover</h3>
           <img slot="icon" src="@/assets/icon/search.png" />
         </div>
-        <p>new Discover</p>
+       <div @click="gosend">
+          <p >new Discover</p>
+         </div>
       </header>
       <main>
         <div class="imgone">
@@ -86,6 +88,12 @@ customFlow
     this.getListData();
   },
   methods: {
+    gosend(){
+      this.$router.push("/myDynamic");
+
+      console.log(1111111111,'发布');
+      
+    },
     loadMore() {
       if (this.list.length > 0) {
         this.skip = this.list.length;

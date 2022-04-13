@@ -8,10 +8,15 @@
       <mt-button icon="more" slot="right"></mt-button>
     </mt-header>
     <div class="body">
+      <!-- <h3>hhhhhh</h3>
+      <h3 v-html="obj.id"></h3> -->
+      <img :src="obj.src" alt="" />
       <h3>{{ obj.title }}</h3>
-       <div class="con" v-html="obj.content"></div>
+     <div class="con" v-html="obj.content"></div>
+      <!-- <h3>{{ obj.price }}</h3> -->
+      <!-- <aside v-html="obj.src"></aside>
+      <div class="con" v-html="obj.content"></div> -->
     </div>
-    
   
 
   </div>

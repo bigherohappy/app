@@ -3,28 +3,28 @@
   <div class="tabbar" :style="`height:${$store.state.screenH}px`">
     <mt-tabbar v-model="active" @click.native="changeTab">
       <mt-tab-item id="sy" fixed>
-        <img slot="icon" src="@/assets/select/首页.png" v-if="active==='sy'" />
-        <img slot="icon" src="@/assets/icon/首页.png" v-else />
+        <img slot="icon" src="@/assets/select/shome.png" v-if="active==='sy'" />
+        <img slot="icon" src="@/assets/icon/home.png" v-else />
         首页
       </mt-tab-item>
       <mt-tab-item id="hd">
-        <img slot="icon" src="@/assets/select/活动 旗帜 标记.png" v-if="active==='hd'" />
-        <img slot="icon" src="@/assets/icon/活动 旗帜 标记.png" v-else />
+        <img slot="icon" src="@/assets/select/sactive.png" v-if="active==='hd'" />
+        <img slot="icon" src="@/assets/icon/active.png" v-else />
         活动
       </mt-tab-item>
       <mt-tab-item id="load">
-        <img slot="icon" src="@/assets/select/加.png" v-if="active==='load'" />
-        <img slot="icon" src="@/assets/icon/加.png" v-else />
+        <img slot="icon" src="@/assets/select/sshop.png" v-if="active==='load'" />
+        <img slot="icon" src="@/assets/icon/shop.png" v-else />
         特产
       </mt-tab-item>
       <mt-tab-item id="xx">
-        <img slot="icon" src="@/assets/select/消息.png" v-if="active==='xx'" />
-        <img slot="icon" src="@/assets/icon/消息.png" v-else />
+        <img slot="icon" src="@/assets/select/dynamic.png" v-if="active==='xx'" />
+        <img slot="icon" src="@/assets/icon/ndynamic.png" v-else />
         消息
       </mt-tab-item>
       <mt-tab-item id="my">
-        <img slot="icon" src="@/assets/select/我的.png" v-if="active==='my'" />
-        <img slot="icon" src="@/assets/icon/我的.png" v-else />
+        <img slot="icon" src="@/assets/select/smy.png" v-if="active==='my'" />
+        <img slot="icon" src="@/assets/icon/my.png" v-else />
         我的
       </mt-tab-item>
     </mt-tabbar>

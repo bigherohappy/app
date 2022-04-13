@@ -11,7 +11,7 @@ body{
   margin: 0;
 }
 .tabbar div.mint-tabbar>.mint-tab-item.is-selected{
-  color: red;
+  color: #78e69d ;
 }
 
 

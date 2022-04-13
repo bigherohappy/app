@@ -16,6 +16,7 @@ import MypublicWelfare from '../components/My/MypublicWelfare'
 import MyProject from '../components/My/MyProject'
 import MyCollection from '../components/My/MyCollection'
 import MyDetail from '../components/My/MyDetail'
+import MyDynamic from '../components/My/MyDynamic'
 import ShopDetail from '../components/ShopDetail'
 import ActivieDetail from '../components/ActivieDetail'
 import Shop from '../components/Shop'
@@ -39,6 +40,7 @@ const routes = [
   {path: '/myCollection',component:MyCollection},
   {path: '/myProject',component: MyProject},
   {path: '/myDetail/:id',component: MyDetail},
+  {path: '/myDynamic',component: MyDynamic},
   {path: '/shopDetail/:id',component: ShopDetail},
   {path: '/activieDetail/:id',component: ActivieDetail},
   {path: '/shop',component: Shop},
