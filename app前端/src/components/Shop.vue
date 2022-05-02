@@ -47,13 +47,14 @@ export default {
     };
   },
   mounted() {
-    // const params = { params: this.$route.params };
-    // this.$axios.get("getProductId", params).then((rs) => {
-    //   const obj = rs.obj;
-    //   obj.src = this.$store.state.Url + obj.smallSrc;
-    //   obj.date = new Date(obj.updatedAt).toLocaleDateString();
-    //   this.obj = obj;
-    // });
+    const params = { params: this.$route.params };
+    this.$axios.get("getProductId1", params).then((rs) => {
+      const obj = rs.obj;
+      obj.src = this.$store.state.Url + obj.smallSrc;
+      obj.date = new Date(obj.updatedAt).toLocaleDateString();
+      this.obj = obj;
+      console.log(obj,'shop')
+    });
   },
   methods:{
    onClickLeft () {

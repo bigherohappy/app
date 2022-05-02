@@ -1,22 +1,52 @@
 <template>
-<!-- 消息页面 -->
-  <div class="info">
-    <h3>项目提现</h3>
-   
-  </div>
+	<div class="container">
+		<div class="status-bar"></div>
+		<div class="list">
+			<!--列表-->
+			<card :list="list"></card>
+		</div>
+	</div>
 </template>
+
 <script>
+import card from '@/components/card/index.vue'
 export default {
-  name: "info",
-  data() {
-    return {
-      Url: this.$store.state.Url
-    };
-  }
-};
+	components: {card},
+	data() {
+		return {
+			list: [
+				{
+					images: [1],
+					tags: 2
+				},
+				{
+					images: [1,2,3,4],
+					tags: 6
+				},
+				{
+					images: [1,2,3,4,5],
+					tags: 2
+				}
+			]
+		}
+	},
+	onLoad() {
+
+	},
+	methods: {
+
+	}
+}
 </script>
-<style scoped lang='less'>
-.info {
- background-color: #fff;
+
+<style lang="less" scoped>
+.container{
+	height: 100vh;
+	overflow: hidden;
+	background-color: #F9F9F9;
+}
+.list{
+	overflow-y: auto;
+	height: calc(100vh - var(--status-bar-height));
 }
 </style>

@@ -15,10 +15,10 @@
         <div>{{ el.price }}</div> -->
         <van-swipe-cell>
           <van-card
-            num="999"
+            :num="el.num"
             :price="el.price"
-            desc="洞鹿特产"
-            :title="el.product"
+            :desc="el.con"
+            :title="el.title"
             class="goods-card"
             :thumb="el.src"
           />
@@ -54,7 +54,8 @@ export default {
     getListData(fun) {
       const skip = this.skip;
       const params = { params: { start: this.skip, pageSize: 8 } };
-      this.$axios.get("getProduct", params).then((rs) => {
+      this.$axios.get("getProduct1", params).then((rs) => {
+        console.log(rs,'rs结果')
         if (rs.length === 0) {
           // Toast("已经没有数据啦");
           this.loading = true;
@@ -62,7 +63,7 @@ export default {
         }
         rs = rs.map((el) => {
           el.date = new Date(el.updatedAt).toLocaleDateString();
-          el.src = this.$store.state.Url + el.smallSrc;
+          el.src = this.$store.state.Url +'smallSrc/'+ el.smallSrc;
 
           return el;
         });

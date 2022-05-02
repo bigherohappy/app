@@ -1,37 +1,27 @@
 <template>
 <!-- 首页中的推荐组件 -->
   <div class="recommend" :style="`height:${$store.state.screenH-101}px`">
-    <mt-swipe :auto="2000" style="height:180px">
-      <mt-swipe-item>
-         <img :src="`${this.Url}images/ban1.jpg`" fit='fit' alt  />
-      </mt-swipe-item>
-      <mt-swipe-item>
-          <img :src="`${this.Url}images/ban2.jpg`" alt />
-      </mt-swipe-item>
-      <mt-swipe-item>
-          <img :src="`${this.Url}images/ban3.jpg`" alt />
-      </mt-swipe-item>
-    </mt-swipe>
-    <mt-loadmore ref="refresh" :top-method="refrash" :topDistance="30">
-      <ul
-        v-infinite-scroll="loadMore"
-        infinite-scroll-disabled="loading"
-        infinite-scroll-distance="10"
-      >
-        <li class="list" v-for="el in list" :key="el.id">
-          <mt-cell-swipe :right="right(el.id)" :left="left(el.id)">
-            <mt-cell is-link :to="`/detail/${el.id}`">
-              <div class="word">
-                <h4 class="title" v-html="el.product"></h4>
-                <div class="desc" v-html="el.price"></div>
-              </div>
-              <div class="date" v-html="el.date"></div>
-            </mt-cell>
-            <img slot="icon" :src="el.src" width="48" height="48" />
-          </mt-cell-swipe>
-        </li>
-      </ul>
-    </mt-loadmore>
+    <h4>民俗文化</h4>
+  <div class="con">
+<p>春节在我们这里是最重视的节日，我们会早早的准备着年货，等着爸爸妈妈回家过年</p>
+  <img src="../assets/f.jpg" alt="">
+  <p>到了春节那天早早的起床，放鞭炮、贴春联</p>
+  <img src="../assets/ty.jpg" alt="">
+
+  <p>一家人在一起吃团圆饭、包汤圆</p>
+    <img src="../assets/yh.jpg" alt="">
+    <p>大年三十的晚上，我们会一起聊天，守夜，等待新的一年的到来，长辈们会包压岁钱，代表着好运气</p>
+
+
+  <img src="../assets/xn.jpg" alt="">
+<p>小盆友们一起玩仙女棒、摔炮、小金鱼等等</p>
+  
+
+
+  </div>
+  <!-- <img src="../../assets/car.jpg" alt=""> -->
+
+    
   </div>
 </template>
 <script>
@@ -45,20 +35,7 @@ export default {
       i: 1,
       curPage: 0,
       skip: 0,
-      right: id => [
-        {
-          content: "删除",
-          style: { background: "red", color: "#fff" },
-          handler: () => this.fun(id)
-        }
-      ],
-      left: id => [
-        {
-          content: "不显示",
-          style: { background: "red", color: "#fff" },
-          handler: () => this.fun1(id)
-        }
-      ]
+     
     };
   },
   mounted() {
@@ -110,62 +87,20 @@ export default {
 
 <style lang="less" scoped>
 div.recommend {
+  padding: 5px;
   touch-action: none;
   overflow: auto;
- .mint-swipe-item img{
-   width:100%;
-   height: 100%;
- }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    li.list {
-      line-height: 80px;
-      a,
-      a:visited {
-        padding-bottom: 5px;
-      }
-      .mint-cell:last-child {
-        background-image: none;
-      }
-      .mint-cell-wrapper {
-        padding: 0 0 0 2px;
-      }
-      .mint-cell-swipe-button {
-        line-height: 70px;
-      }
-      .mint-cell-value.is-link {
-        display: flex;
-        div.word {
-          flex: 7;
-          h4.title {
-            color: #666;
-            margin: 10px 0 5px;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            overflow: hidden;
-            font-size: 15px;
-          }
-          div.desc {
-            font-size: 14px;
-            height: 40px;
-            line-height: 25px;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 1;
-            overflow: hidden;
-          }
-        }
-        div.date {
-          flex: 2;
-          font-size: 12px;
-          text-align: right;
-          margin-right: 8px;
-        }
-      }
-    }
+  h4{
+    padding-left: 10px;
+  }
+  .con{
+    padding-left: 10px;
+ margin: 0 auto;
+  }
+  img{
+   border-radius: 5px;
+    width: 97%;
+    
   }
 }
 </style>

@@ -1,180 +1,158 @@
 <template>
-<!-- 消息页面 -->
-  <div class="info">
-      <div class="box">
-        <textarea name="" id="" cols="10" rows="3" v-model='texts'></textarea>
-        <!-- 用户写微博的地方 -->
-        <button v-on:click='nei()'>发布</button>
-        <ul>
-            <li v-for='(item,i) in msg' :key="i">
-                <!-- 
-                    v-for把内容循环遍历出来
-                 -->
-                <p class="text">{{item.text}}</p>
-                <p class="date">{{item.date}}</p>
-              <img :src="baseImg" alt="" class="img" style="width:30px;height:30px">
-            
-              <!-- <img :src="imageUrl" alt="" class="img"> -->
+  <div class="rigster">
+    <input type="file" id="fileinp" accept="image/*" ref="avatarInput" @change="update" />
+<br>
+	<img :src="avatar" style="display:block;width:35%;margin:20px auto ;border:1px solid #ccc;padding:10px" alt="照片展示区"><br>
+<button @click="uploadbtn" >上传</button>
 
-                <span v-on:click='shanchu'>删除</span>
-                <!-- 点击事件，点击之后执行shanchu（）函数 -->
-            </li>
-        </ul>
-    </div>
-   <div class="file">
-      <input type="file" class="updata" accept="image/*" @change="change($event)" ref="updata">
-      <img :src="imageUrl ? imageUrl : baseImg" alt="" class="img">
-    </div>
   </div>
 </template>
+  
 <script>
+import { Toast } from "mint-ui";
+import '../../assets/js/jquery-2.1.3'
+import '../../assets/js/com'
+import Qs from "qs";
 export default {
-  name: "info",
-  data() {
-    return {
-      Url: this.$store.state.Url,
-      // 上传的图片
-        imageUrl: '',
-        // 默认的图片
-        baseImg: '',
-         // texts为空接收用户的内容
-            texts:'',
-            // 创建msg用于存放用户的数据
-            msg:[
-                {
-                    text:'这是第一条内容',
-                    date:'2020-11-5',
-                    img:''
-                },
-                {
-                    text:'这是第二条内容',
-                    date:'2020-11-5',
-                    img:''
-                }
-                ]
+  created() {
+   
+        this.$axios.get('token')
+        .then(res => {
+            this.uploadToken = res
+        })
+    },
+  
+   methods : {
+    update:function(e){
+      let that = this
+      let file = e.target.files[0];
+      let imgsize = file.size;
+      if(imgsize > 5242880){
+        alert("图片大小不能超过5M");
+         return false;
+      } 
+    },
+    uploadbtn:function(){
+      let that = this
+      let files = this.$refs.avatarInput.files[0];
 
-
-    };
+      // console.log(files,'files')
+      let param = new FormData(); //创建form对象 
+       param.append('file',files);//通过append向form对象添加数据 
+      // 创建一个空的axios 对象
+     
+      
+        this.$axios.post('newTopic',param)
+        .then(res => {
+           console.log(res,'res')
+           console.log(param ,'param ')
+        })
+  //    this.$axios.post({
+  //       url:'/newTopic',
+  //       type:'post',
+  //       data:param,
+  //       dataType:'json',
+  //       processData: false,
+  //       contentType:false,
+  //       success:function(res){
+  //         console.log(res)
+  //         that.avatar="http://localhost"+res.src; 
+  //       },
+  //       error:function(err){
+  //         console.log(err)
+  //       }
+  //     })
+    }
   },
-  methods: {
-
-    
-     change(e) {
-      console.log(e.target.files[0].name);
-      // 判断是不是规定格式
-      // let name  =  e.target.files[0].name
-
-      // 获取到第一张图片
-      let file = e.target.files[0]
-
-      // 创建文件读取对象
-      var reader = new FileReader()
-      var that = this 
-
-      //  将文件读取为DataURL
-      reader.readAsDataURL(file)
-
-      // 读取成功调用方法
-      reader.onload = e => {
-        console.log('读取成功');
-
-        // e.target.result 获取 读取成功后的  文件DataURL
-        that.imageUrl = e.target.result
-
-        // 如果要将图片上传服务器，就在这里调用后台方法
-      }
-
-     },
-        // 删除当前的内容
-            shanchu(index){
-                this.msg.splice(index,1);
-            },
-            
-            nei(){
-                // date获取时间
-                var date= new Date();
-                // 做判断，如果用户输入内容为空，提醒他输入内容
-                if(this.texts==''){
-                    alert('请输入内容');
-                    return;
-                }
-                // 向后追加当前用户输入的内容
-                this.msg.push({
-
-                    text:this.texts,
-                    // 获取当前日期
-                    date:date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()
-                });
-                // 输入完之后又为空
-                this.texts=''
-            }
-
-
-
-
-   },
-   created() {
-     // 获取默认显示的图片
-     this.baseImg = require('../../assets/icon/特色.png')
-   },
-   mounted() {
-    
-   }
-}
+ data() {
+    return {
+       avatar:"",
+    imgname:'',
+      uploadToken:'',
+        token: {},
+      // 七牛云的上传地址，根据自己所在地区选择，我这里是华南区
+      domain: 'https://upload-z2.qiniup.com',
+      // 这是七牛云空间的外链默认域名
+      qiniuaddr: 'rb41ymjvq.hn-bkt.clouddn.com',
+        fileList: [],
+      obj: {
+        content: "",
+         img: "",
+       
+      },
+      repassword: ""
+    };
+  }
+  }
+ 
 
 </script>
-<style scoped lang='less'>
-.info {
- background-color: #fff;
-}
-	ul{
-            list-style: none;
-        }
-        .box{
-            width: 400px;
-            height: 300px;
-            margin: auto;
-        }
-        textarea{
-            width: 300px;
-            height: 100px;
-            /* margin: auto; */
-        }
-        li>p{
-            margin: 10px;
-            
-        }
-        li>span{
-            cursor: pointer;
-        }
-        .text{
-            display: inline-block;
-        }
-        .date{
-            display: inline-block;
-        }
 
-.file {
-    position: relative;
-    width: 200px;
-    height: 150px;
-    background-color: #ccc;
+<style lang="less">
+div.rigster {
+  .home-van-cell {
+    background-color: #fff;
+    overflow: hidden;
+    padding: 1.25rem 0.6875rem 1.25rem 0.703125rem;
+
+    .home-van-cell__title {
+      float: left;
+      padding-top: 1.34375rem;
+
+      span {
+        font-size: 1rem;
+        font-family: PingFangSC-Regular, PingFang SC;
+        font-weight: 400;
+        color: rgba(34, 34, 34, 1);
+      }
+    }
+
+    .home-van-cell__value {
+      float: right;
+
+      img {
+        width: 4.0625rem;
+        height: 4.0625rem;
+        border-radius: 50%;
+      }
+
+      .hiddenInput {
+        display: none;
+      }
+    }
   }
-  .updata {
-    display: block;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
+  padding-top: 100px;
+  .mint-cell-wrapper {
+    background-size: 100% 1px;
   }
-  .img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200px;
-    height: 150px;
+  .myhead {
+    // background-color:rgb(150, 30, 30);
+    background-color: rgb(120, 230, 157);
   }
+  b {
+    display: inline-block;
+    // color: rgb(150, 30, 30);
+    color: rgb(120, 230, 157);
+    padding-top: 5px;
+  }
+  div.btn {
+    display: flex;
+    justify-content: space-around;
+    button {
+      padding: 8px 25px;
+      margin: 10px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+      // background-color: rgb(150, 30, 30);
+      background-color: rgb(120, 230, 157);
+
+      color: white;
+      &:last-child {
+        background-color: transparent;
+        background-color: #555;
+      }
+    }
+  }
+}
 </style>

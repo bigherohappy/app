@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Search from '../views/Search.vue'
 import About from '../views/About.vue'
 import Detail from '../views/Detail.vue'
+import MessageDt from '../views/MessageDt.vue'
 import Detail1 from '../views/Detail1.vue'
 import Tabbar from '../views/Tabbar.vue'
 import Personal from '../components/Personal'
@@ -15,6 +16,10 @@ import MyFriend from '../components/MyFriend'
 import MypublicWelfare from '../components/My/MypublicWelfare'
 import MyProject from '../components/My/MyProject'
 import MyCollection from '../components/My/MyCollection'
+import MyCalender from '../components/My/MyCalender'
+import Natural from '../components/My/Natural'
+import Food from '../components/My/Food'
+import Traffic from '../components/My/Traffic'
 import MyDetail from '../components/My/MyDetail'
 import MyDynamic from '../components/My/MyDynamic'
 import ShopDetail from '../components/ShopDetail'
@@ -30,6 +35,7 @@ const routes = [
   {path: '/search',component: Search},
   {path: '/personal',component: Personal},
   {path: '/detail/:id',component: Detail},
+  {path: '/message/:id',component: MessageDt},
   {path: '/detail1/:id',component: Detail1},
   {path: '/rigster',component: Rigster},
   {path: '/myImage',component: MyImage},
@@ -38,6 +44,10 @@ const routes = [
   {path: '/myFriend',component: MyFriend},
   {path: '/mypublicWelfare',component: MypublicWelfare},
   {path: '/myCollection',component:MyCollection},
+  {path: '/myCalender',component:MyCalender},
+  {path: '/natural',component:Natural},
+  {path: '/food',component:Food},
+  {path: '/traffic',component:Traffic},
   {path: '/myProject',component: MyProject},
   {path: '/myDetail/:id',component: MyDetail},
   {path: '/myDynamic',component: MyDynamic},

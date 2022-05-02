@@ -1,4 +1,5 @@
 const fs = require('fs')
+
 module.exports = {
     getUserInfo: async function(req, res) {
         let code = req.query.code;
@@ -16,6 +17,58 @@ module.exports = {
                 res.json((JSON.parse(obj.text)).openid)
             });
     },
+
+    uploadAvatar: function (req, res) {
+
+      req.file('avatar').upload({
+        // don't allow the total upload size to exceed ~10MB
+        maxBytes: 10000000
+      },function whenDone(err, uploadedFiles) {
+        if (err) {
+          return res.serverError(err);
+        }
+    
+        // If no files were uploaded, respond with an error.
+        if (uploadedFiles.length === 0){
+          return res.badRequest('No file was uploaded');
+        }
+    
+        // Get the base URL for our deployed application from our custom config
+        // (e.g. this might be "http://foobar.example.com:1339" or "https://example.com")
+        var baseUrl = sails.config.custom.baseUrl;
+    
+        // Save the "fd" and the url where the avatar for a user can be accessed
+        User.update(req.session.userId, {
+    
+          // Generate a unique URL where the avatar can be downloaded.
+          avatarUrl: require('util').format('%s/user/avatar/%s', baseUrl, req.session.userId),
+    
+          // Grab the first file and use it's `fd` (file descriptor)
+          avatarFd: uploadedFiles[0].fd
+        })
+        .exec(function (err){
+          if (err) return res.serverError(err);
+          return res.ok();
+        });
+      });
+    },
+    uploadAvatar1: function(req, res) {
+      req.file('file').upload({
+              dirname: require('path').resolve(sails.config.appPath, 'assets/photos')
+          },
+          function(err, files) {
+              if (err)
+                  return res.serverError(err);
+              if (files.length === 0)
+                  return res.json(false);
+              let filePath = files[0].fd.split('\\');
+              filePath = filePath[filePath.length - 1];
+              res.json(filePath);
+          });
+  },
+ 
+    
+    
     receive: function(req, res) {
         req.file('file').upload({
                 dirname: require('path').resolve(sails.config.appPath, 'assets/upload')
@@ -78,6 +131,12 @@ module.exports = {
       const arr=await Product.find().sort("id desc").skip(skip).limit(pageSize);
       res.json(arr);
     },
+    getProduct1: async function(req, res) {
+      let skip=req.query.start;
+      let pageSize=req.query.pageSize;
+      const arr=await Shop.find().sort("id desc").skip(skip).limit(pageSize);
+      res.json(arr);
+    },
     // 得到文章数据
     getArt1: async function(req, res) {
       let skip=req.query.start;
@@ -85,6 +144,13 @@ module.exports = {
       const arr=await Article1.find().sort("id desc").skip(skip).limit(pageSize);
       res.json(arr);
     },
+      // 得到资讯数据
+      getNotice: async function(req, res) {
+        let skip=req.query.start;
+        let pageSize=req.query.pageSize;
+        const arr=await Notice.find().sort("id desc").skip(skip).limit(pageSize);
+        res.json(arr);
+      },
     // 得到活动数据
     getActive: async function(req, res) {
       let skip=req.query.start;
@@ -98,6 +164,21 @@ module.exports = {
       res.json(arr);
 
     },
+    getDyno:async function(req, response){
+      response.set( 'content-type', mimeType );//设置返回类型
+      var stream = fs.createReadStream( imageFilePath );
+      var responseData = [];//存储文件流
+      if (stream) {//判断状态
+          stream.on( 'data', function( chunk ) {
+            responseData.push( chunk );
+          });
+          stream.on( 'end', function() {
+             var finalData = Buffer.concat( responseData );
+             response.write( finalData );
+             response.end();
+          });
+      }
+    },
     getSearchData1: async function(req, res) {
       let keyword=req.query.keyword;
       const arr=await Article1.find({title:{contains:keyword}}).sort("id desc");
@@ -110,6 +191,13 @@ module.exports = {
         const num=await Comment.count({'artId':id})
         res.json({obj,num});
       },
+      getNoticeId: async function(req, res) {
+        let id=req.query.id;
+        const obj=await Notice.findOne({id});
+        // const num=await Comment.count({'artId':id})
+        // res.json({obj});
+        res.json(obj);
+      },
       getArtId1: async function(req, res) {
         let id=req.query.id;
         const obj=await Article1.findOne({id});
@@ -120,6 +208,12 @@ module.exports = {
         let id=req.query.id;
         const obj=await Product.findOne({id});
         const num=await Product.count({'productId':id})
+        res.json({obj,num});
+      },
+      getProductId1: async function(req, res) {
+        let id=req.query.id;
+        const obj=await Shop.findOne({id});
+        const num=await Shop.count({'productId':id})
         res.json({obj,num});
       },
       getActiveId: async function(req, res) {
@@ -232,6 +326,95 @@ module.exports = {
         }
        
       },
+      // // 添加动态
+      insertDt: async function(req, res) {
+        const json=req.allParams();
+        // console.log(obj,'数据')
+        const obj =await Dt.create(json).fetch();
+
+        const base64Data = obj.img;
+
+        const dataBuffer=Buffer.from(base64Data,'base64');
+
+        fs.writeFile(`${obj.id}.jpg`,dataBuffer,function(err){
+          if(err){
+              res.send(err)
+          }else{
+            res.send('保存成功')
+          }
+        })
+        // console.log(obj,'动态')
+        // const rs=fs.createReadStream(obj.img);
+        // const ws =fs.createWriteStream(obj.id+'.jpg');
+        // rs.pipe(ws);
+        res.json(obj); 
+      },
+      token:async function(req,res){
+        console.log(1111111)
+        const qnconfig = require('../../photo.js')
+        res.status(200).send(qnconfig.uploadToken)
+      },
+      newTopic: function(req, res) {
+        req.file('image').upload({
+                dirname: require('path').resolve(sails.config.appPath, 'assets/upload')
+            },
+            function(err, files) {
+                if (err)
+                    return res.serverError(err);
+                if (files.length === 0)
+                    return res.json(false);
+                let arr = files[0].fd.split('\\');
+                let fileName = arr[arr.length - 1];
+                res.json(fileName);
+            });
+    },
+      
+
+
+//获取七牛云的上传凭证
+uploadToken:async function(req,res){
+  console.log(111111)
+  
+  const qiniu = require("qiniu");
+  const accessKey = '0JgdTAjMeXTK6qVjekB3mgpP5kvv-OH0FW94Dl8M'
+  const secretKey = 'nD8_fsLPPCaX5nyVYocyaMqhPuVfM5_Uz9eGb8MH'
+    var mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
+    let bucket = 'bighero'
+    //要上传的空间
+    var options = {
+      scope: bucket,
+      returnBody: '{"key":"$(key)","hash":"$(etag)","fsize":$(fsize),"bucket":"$(bucket)","name":"$(x:name)"}'
+    };
+    
+    // 构建上传凭证
+    var putPolicy = new qiniu.rs.PutPolicy(options);
+    var uploadToken=putPolicy.uploadToken(mac);
+    if(uploadToken){
+        res.json({uploadToken})
+        console.log(111111)
+    }
+},
+      //   添加商品
+  //     insertDt: async function(req, res) {
+  //     req.file('smallSrc').upload({
+  //             dirname: require('path').resolve(sails.config.appPath, 'assets/smallSrc')
+  //         },
+  //         async function(err, files) {
+  //             if (err)
+  //                 return res.serverError(err);
+  //             if (files.length === 0)
+  //                 return res.json(false);
+  //             let img = files[0].fd.split('\\');
+  //                 img  = img[img.length - 1];
+  //             let json=req.allParams();
+  //             json.img=img;
+  //             let row = await Dt.create(json).fetch();
+  //             res.json(row);
+  //         });
+  // },
+
+
+
       getComment:async function(req, res) {
         const artId=req.query.artId;
         const skip=req.query.skip;

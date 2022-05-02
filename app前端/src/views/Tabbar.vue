@@ -96,20 +96,20 @@ export default {
 </script>
 
 <style lang="less">
-body {
-  margin: 0;
-}
-div.tabbar {
-  touch-action: none;
-  .mint-tab-item-icon {
-    width: 20px;
-    height: 20px;
-  }
-  div.mint-popup .mint-popup-bottom{
-    width: 100%;
-    height: 200px;
+// body {
+//   margin: 0;
+// }
+// div.tabbar {
+//   touch-action: none;
+//   .mint-tab-item-icon {
+//     width: 20px;
+//     height: 20px;
+//   }
+//   div.mint-popup .mint-popup-bottom{
+//     width: 100%;
+//     height: 200px;
 
 
-  }
-}
+//   }
+// }
 </style>

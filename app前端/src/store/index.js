@@ -28,6 +28,9 @@ export default new Vuex.Store({
       rs.avatarUrl=state.Url+rs.avatarUrl;
       state.userInfo={avatarUrl:rs.avatarUrl,phone:rs.phone,username:rs.username}
     },
+    writeDt(state,rs){
+      state.Dt={content:rs.content,img:rs.img}
+    },
     logout(state){
       state.userInfo=null
     }

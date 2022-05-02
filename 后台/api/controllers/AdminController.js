@@ -35,7 +35,7 @@ module.exports = {
     },
     showUser: function(req, res) {
         res.json(req.session.userinfo.nicheng);
-        // console.log(req.session.userinfo.nicheng);
+        console.log(req.session.userinfo.nicheng);
         
     },
     registed: async function(req, res) {
@@ -121,7 +121,42 @@ module.exports = {
             res.json(false)
         }
     },
-  
+//   添加商品
+    addShop: async function(req, res) {
+        req.file('smallSrc').upload({
+                dirname: require('path').resolve(sails.config.appPath, 'assets/smallSrc')
+            },
+            async function(err, files) {
+                if (err)
+                    return res.serverError(err);
+                if (files.length === 0)
+                    return res.json(false);
+                let smallImg = files[0].fd.split('\\');
+                smallImg  = smallImg[smallImg.length - 1];
+                let json=req.allParams();
+                json.smallSrc=smallImg;
+                let row = await Shop.create(json).fetch();
+                res.json(row);
+            });
+    },
+    //   话题管理
+    addTopic : async function(req, res) {
+        req.file('smallSrc').upload({
+                dirname: require('path').resolve(sails.config.appPath, 'assets/smallSrc')
+            },
+            async function(err, files) {
+                if (err)
+                    return res.serverError(err);
+                if (files.length === 0)
+                    return res.json(false);
+                let smallImg = files[0].fd.split('\\');
+                smallImg  = smallImg[smallImg.length - 1];
+                let json=req.allParams();
+                json.smallSrc=smallImg;
+                let row = await Topic.create(json).fetch();
+                res.json(row);
+            });
+    },
     addArticle: async function(req, res) {
         req.file('smallSrc').upload({
                 dirname: require('path').resolve(sails.config.appPath, 'assets/smallSrc')
@@ -190,6 +225,34 @@ module.exports = {
             });
     },
     newActive: function(req, res) {
+        req.file('image').upload({
+                dirname: require('path').resolve(sails.config.appPath, 'assets/upload')
+            },
+            function(err, files) {
+                if (err)
+                    return res.serverError(err);
+                if (files.length === 0)
+                    return res.json(false);
+                let arr = files[0].fd.split('\\');
+                let fileName = arr[arr.length - 1];
+                res.json(fileName);
+            });
+    },
+    newShop: function(req, res) {
+        req.file('image').upload({
+                dirname: require('path').resolve(sails.config.appPath, 'assets/upload')
+            },
+            function(err, files) {
+                if (err)
+                    return res.serverError(err);
+                if (files.length === 0)
+                    return res.json(false);
+                let arr = files[0].fd.split('\\');
+                let fileName = arr[arr.length - 1];
+                res.json(fileName);
+            });
+    },
+    newTopic: function(req, res) {
         req.file('image').upload({
                 dirname: require('path').resolve(sails.config.appPath, 'assets/upload')
             },

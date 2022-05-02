@@ -1,26 +1,30 @@
 <template>
 	<div class="content">
+		<van-nav-bar title="" left-text="返回" left-arrow @click-left="onClickLeft"/>
+
     <van-uploader v-model="fileList" multiple :max-count="2" />
 		<image src="../../assets/xi.jpg" mode="" style="width: 80px;height: 80px;"></image>
 		<div class="title">
-			<input type="text" value="" placeholder="分享你的好心情~ 分享你的有趣故事哦" />
+			<input type="text" value="" v-model="cont" placeholder="分享你的好心情~ 分享你的有趣故事哦" />
 		</div>
 	
+			<div>
+				<p>{{cont}}</p>
+
+			</div>
 		<!-- <div class="con">
 			<textarea value="" placeholder="分享你的有趣故事哦"  rows="3" cols="40" />
 		</div> -->
-		<div class="btn" style="margin-top:20px">
+		<!-- <div class="btn" style="margin-top:20px">
 			<div class="one bg">
 				<span style="color:#000">#话题</span>
 			</div>
 			<div class="two bg">
 				<span style="color:#000">@用户</span>
-
-				<!-- <text>@用户</text> -->
 			</div>
 			
-		</div>
-		<van-button type="primary" plain block>发布动态</van-button>
+		</div> -->
+		<van-button type="primary" plain block @click="send">发布动态</van-button>
 		<!-- <button type="default">发布动态</button> -->
 	</div>
 </template>
@@ -30,16 +34,10 @@
 		components: {
 		
     },
-    //  setup() {
-    //     const fileList = ref([]);
-
-    // return {
-    //   fileList,
-    // };
-  // },
 		data() {
 			return {
-        fileList:[]
+				fileList:[],
+				cont:''
 				
 			};
 		},
@@ -51,6 +49,14 @@
 			// this.$refs.waterfalls_flow_nav.getList();
 		},
 		methods: {
+			onClickLeft  () {
+				history.back();
+			},
+			send(){
+				console.log(this.cont,'内容')
+				console.log(this.fileList,'fileList')
+
+			}
 			
 		},
 	};
@@ -61,6 +67,18 @@
 		padding: 10px;
 		background-color: #fff;
 		height: 900px;
+		 /deep/ .van-ellipsis {
+    color: #78e69d;
+  }
+
+/deep/  .van-nav-bar .van-icon {
+    color: #78e69d;
+  }
+
+ /deep/ .van-nav-bar__text {
+    color: #78e69d;
+  }
+
 		image{
 			border-radius: 10px;
 			// padding: 10px;

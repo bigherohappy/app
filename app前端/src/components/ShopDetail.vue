@@ -11,7 +11,7 @@
       <!-- <h3>hhhhhh</h3>
       <h3 v-html="obj.id"></h3> -->
       <img :src="obj.src" alt="" />
-      <h3>{{ obj.product }}</h3>
+      <h3>{{ obj.title }}</h3>
 
       <!-- <h3>{{ obj.price }}</h3> -->
       <!-- <aside v-html="obj.src"></aside>
@@ -19,9 +19,9 @@
     </div>
     <div>
       <mt-cell title="价格"  >{{obj.price }}元/kg</mt-cell>
-      <mt-cell title="送至" value="销售(100)"></mt-cell>
-      <mt-cell title="选择" to="//github.com" is-link value=""></mt-cell>
-      <mt-cell title="评论(66)" to="//github.com" is-link value="">
+      <mt-cell title="送至" >{{obj.num }}</mt-cell>
+      <mt-cell title="选择" to="" is-link value=""></mt-cell>
+      <mt-cell title="评论(66)" to="" is-link value="">
       </mt-cell>
      
   
@@ -68,9 +68,9 @@ export default {
   },
   mounted() {
     const params = { params: this.$route.params };
-    this.$axios.get("getProductId", params).then((rs) => {
+    this.$axios.get("getProductId1", params).then((rs) => {
       const obj = rs.obj;
-      obj.src = this.$store.state.Url + obj.smallSrc;
+      obj.src = this.$store.state.Url + 'smallSrc/'+obj.smallSrc;
       obj.date = new Date(obj.updatedAt).toLocaleDateString();
       this.obj = obj;
     });

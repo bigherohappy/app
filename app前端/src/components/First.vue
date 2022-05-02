@@ -42,7 +42,8 @@
           <!-- <img src="@/assets/1.jpg" alt /> -->
         </mt-swipe-item>
         <mt-swipe-item>
-          <message/>
+          <!-- <message/> -->
+          <Develop/>
           <!-- <img src="@/assets/2.jpg" alt /> -->
         </mt-swipe-item>
         <mt-swipe-item>
@@ -50,7 +51,7 @@
           <!-- <img src="@/assets/1.jpg" alt /> -->
         </mt-swipe-item>
         <mt-swipe-item>
-        <message/>
+        <country/>
           <!-- <img src="@/assets/2.jpg" alt /> -->
         </mt-swipe-item>
         
@@ -64,6 +65,8 @@ import Recommend from '../components/Recommend'
 import Message from '../components/Message'
 import VideoPlayer from '../components/VideoPlayer'
 import Culture from '../components/Culture'
+import Country from '../components/Country'
+import Develop from '../components/Develop'
 export default {
   data() {
     return {
@@ -76,7 +79,9 @@ export default {
      Recommend,
      Message,
      VideoPlayer,
-     Culture
+     Culture,
+     Country,
+     Develop
  },
   mounted() {},
   methods: {

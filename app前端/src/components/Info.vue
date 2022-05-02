@@ -14,26 +14,26 @@
       </header>
       <main>
         <div class="imgone">
-          <div>
+          <div @click="enterTraffic">
             <img slot="icon" src="@/assets/icon/交通费.png" />
             <p style="font-size: 12px">交通</p>
           </div>
-          <div>
+          <div @click="enterFood">
             <img slot="icon" src="@/assets/icon/特色小菜.png" />
             <p>美食</p>
           </div>
-          <div>
+          <div  @click="enterNatural">
             <img slot="icon" src="@/assets/icon/特色.png" />
             <p>自然</p>
           </div>
-          <div>
+          <div @click="entermyCalender">
             <img slot="icon" src="@/assets/icon/日程.png" />
             <p>日程</p>
           </div>
          
         </div>
       </main>
-      <mt-progress :value="20" :bar-height="5"></mt-progress>
+      <!-- <mt-progress :value="20" :bar-height="5"></mt-progress> -->
       <aside>
      
         <div class="part1">
@@ -93,6 +93,18 @@ customFlow
 
       console.log(1111111111,'发布');
       
+    },
+     entermyCalender() {
+      this.$router.push("/myCalender");
+    },
+    enterTraffic() {
+      this.$router.push("/traffic");
+    },
+    enterFood() {
+      this.$router.push("/food");
+    },
+    enterNatural() {
+      this.$router.push("/natural");
     },
     loadMore() {
       if (this.list.length > 0) {

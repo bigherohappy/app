@@ -2,7 +2,7 @@
 <!-- 活动页 -->
   <div class="care" :style="`height:${$store.state.screenH-51}px`">
     <div class="h" >
-      <h4>活动</h4>
+      <h4 style="padding:0 10px;">活动</h4>
     </div>
     <div class="con" >
       <mt-loadmore ref="refresh" :top-method="refrash" :topDistance="30">
@@ -109,6 +109,9 @@ div.care {
   .con{
  padding-top:40px;
   }
+  a{
+    color:#666;
+  }
 
   ul {
     list-style: none;
@@ -128,8 +131,9 @@ div.care {
         width: 100%;
         margin: 5px;
         img {
-            padding: 5px 0;
-          width: 100%;
+          border-radius: 5px;
+          
+          width: 98%;
           height: 100px;
         }
       }

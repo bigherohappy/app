@@ -12,7 +12,7 @@
       
       <h3>hhhhhhhh</h3>
       <img :src="obj.src" alt="">
-       <div class="con" v-html="obj.content"></div>
+       <!-- <div class="con" v-html="obj.content"></div> -->
     </div>
     
   
@@ -38,7 +38,7 @@ export default {
         /\{\{imgUrl\}\}/g,
         this.$store.state.Url
       );
-      obj.src = this.$store.state.Url + obj.smallSrc;
+      obj.src = this.$store.state.Url +'smallSrc/'+ obj.smallSrc;
       obj.date = new Date(obj.updatedAt).toLocaleDateString();
       this.obj = obj;
     });
